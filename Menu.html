@@ -15,32 +15,66 @@
         
         .container img {
             height: auto;
-            box-shadow: 0 8px 16px white;
+            box-shadow: 0 8px 16px gray;
             border-radius: 15px;
             background-color: #000000;
             padding: 12px;
             width: 15%;
             margin: 30px 0;
         }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        h2 {
+            width: 50%;
+            background-color: goldenrod;
+            box-shadow: 0 5px 16px gray;
+            border-radius: 15px;
+            transition: 0.3s, transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        h2:hover {
+            background-color: #e0c060;
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px gray;
+        }
+
+        h2 {
+            color: black;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .menu-box {
+            margin-bottom: 100px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
     </style>
 </head>
 <body>
-    <img src="logo.png" alt="Moon Cafe Logo" class="logo"> <br>
     <div class="container">
         <img src="logo.png" alt="Moon Cafe Logo" class="logo"> <br>
-            <div class="Menu">
-                <div class="Menu-box">
-                    <h2>Coffee</h2>
-                </div>
-                <div class="Menu-box">
-                    <h2>Tea</h2>
-                </div>
-                <div class="Menu-box">
-                    <h2>None coffee</h2>
-                </div>
-                <div class="Menu-box">
-                    <h2>Desserts</h2>
-                </div>
+        <div class="menu">
+            <div class="menu-box">
+                <h2>Coffee</h2>
+                <h2>Tea</h2>
+            </div>
+            <div class="menu-box">
+                <h2>Non-Coffee</h2>
+                <h2>Desserts</h2>
+            </div>
         </div>
+    </div>
 </body>
 </html>
