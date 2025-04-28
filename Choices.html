@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choices</title>
+    <style>
+        body {
+            background-color: black;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            color: #e9cfae;
+            margin: 20px 0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .container img {
+            height: auto;
+            box-shadow: 0 8px 16px white;
+            border-radius: 15px;
+            background-color: black;
+            padding: 12px;
+            width: 15%;
+            margin: 30px 0;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .choice-box {
+            width: 150px;
+            height: 150px;
+            background-color: goldenrod;
+            box-shadow: 0 5px 16px white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .choice-box:hover {
+            background-color: #e0c060;
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px white;
+        }
+
+        .choice-box h2 {
+            color: black;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Moon Cafe Logo" class="logo"> <br>
+        <h1>Choose</h1>
+        <div class="choices">
+            <a href="Menu.html" class="choice-box">
+                <h2>Dine In</h2>
+            </a>
+            <a href="Menu.html" class="choice-box">
+                <h2>Take Out</h2>
+            </a>
+        </div>
+    </div>   
+</body>
+</html>
