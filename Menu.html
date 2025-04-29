@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         body {
             background-color: black;
@@ -13,6 +14,17 @@
             padding: 0;
         }
         
+        i {
+            color: #e9cfae;
+            border: #e9cfae solid 2px;
+            border-radius: 25px;
+            padding: 10px;
+            background-color: transparent;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
         .container img {
             height: auto;
             box-shadow: 0 8px 16px gray;
@@ -40,7 +52,7 @@
         .menu-item {
             width: 180px;
             height: 100px;
-            background-color: goldenrod;
+            background-color: #e9cfae;
             box-shadow: 0 5px 16px gray;
             border-radius: 15px;
             display: flex;
@@ -52,7 +64,7 @@
         }
 
         .menu-item:hover {
-            background-color: #e0c060;
+            background-color: white;
             transform: scale(1.08);
             box-shadow: 0 8px 20px gray;
         }
@@ -67,6 +79,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="Choices.html"><i class='bx bx-arrow-back'></i></a>
         <img src="logo.png" alt="Moon Cafe Logo" class="logo"> <br>
         <div class="menu">
             <div class="menu-box">
