@@ -1,110 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        body {
-            background-color: black;
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        
-        i {
-            color: #e9cfae;
-            border: #e9cfae solid 2px;
-            border-radius: 25px;
-            padding: 10px;
-            background-color: transparent;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: black;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container img {
-            height: auto;
-            box-shadow: 0 8px 16px gray;
-            border-radius: 15px;
-            background-color: #000000;
-            padding: 12px;
-            width: 15%;
-            margin: 30px 0;
-        }
+    a.back-icon {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      text-decoration: none;
+    }
 
-        .menu {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            margin: 40px 0;
-        }
+    i {
+      color: #e9cfae;
+      border: 2px solid #e9cfae;
+      border-radius: 25px;
+      padding: 10px;
+      background-color: transparent;
+    }
 
-        .menu-box {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-        }
+    .container .logo {
+      width: 200px;
+      height: auto;
+      box-shadow: 0 8px 16px gray;
+      border-radius: 15px;
+      background-color: black;
+      padding: 12px;
+      margin: 30px 0;
+    }
 
-        .menu-item {
-            width: 180px;
-            height: 100px;
-            background-color: #e9cfae;
-            box-shadow: 0 5px 16px gray;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s, 0.3s, 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-        }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
 
-        .menu-item:hover {
-            background-color: white;
-            transform: scale(1.08);
-            box-shadow: 0 8px 20px gray;
-        }
+    .menu-box {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
 
-        .menu-item h2 {
-            color: black;
-            margin: 0;
-            padding: 10px;
-            font-size: 20px;
-        }
+    .menu-item {
+      width: 180px;
+      height: 200px;
+      background-color: #e9cfae;
+      box-shadow: 0 5px 16px gray;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      padding: 10px;
+    }
 
-        .menu-item a {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    .menu-item:hover {
+      background-color: white;
+      transform: scale(1.08);
+      box-shadow: 0 8px 20px gray;
+    }
+
+    .menu-item h2 {
+      color: black;
+      margin-top: 10px;
+      font-size: 20px;
+    }
+
+    .menu-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <a href="Choices.html"><i class='bx bx-arrow-back'></i></a>
-        <img src="logo.png" alt="Moon Cafe Logo" class="logo"> <br>
-        <div class="menu">
-            <div class="menu-box">
-                <a href="Coffee.html" class="menu-item">
-                    <h2>Coffee</h2>
-                </a>
-                <a href="Tea.html" class="menu-item">
-                    <h2>Tea</h2>
-                </a>
-            </div>
-            <div class="menu-box">
-                <a href="Non-Coffee.html" class="menu-item">
-                    <h2>Non-Coffee</h2>
-                </a>
-                <a href="Dessert.html" class="menu-item">
-                    <h2>Desserts</h2>
-                </a>
-            </div>
-        </div>
+  <div class="container">
+    <a href="Choices.html" class="back-icon"><i class='bx bx-arrow-back'></i></a>
+    <img src="logo.png" alt="Moon Cafe Logo" class="logo"><br>
+
+    <div class="menu">
+      <div class="menu-box">
+        <a href="Coffee.html" class="menu-item">
+          <img src="Coffee.png" alt="Coffee-Image" />
+          <h2>Coffee</h2>
+        </a>
+        <a href="Tea.html" class="menu-item">
+          <img src="Tea.png" alt="Tea-Image" />
+          <h2>Tea</h2>
+        </a>
+      </div>
+      <div class="menu-box">
+        <a href="Non-Coffee.html" class="menu-item">
+          <img src="Non-Coffee.png" alt="Non-Coffee-Image" />
+          <h2>Non-Coffee</h2>
+        </a>
+        <a href="Dessert.html" class="menu-item">
+          <img src="Dessert.png" alt="Dessert-Image" />
+          <h2>Desserts</h2>
+        </a>
+      </div>
     </div>
+  </div>
 </body>
 </html>
