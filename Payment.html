@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" /> <!-- Include Boxicons -->
+    <style>
+      body {
+        background-color: black;
+        color: #e9cfae;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .payment-button {
+        background-color: #e9cfae;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      h1, p {
+        margin-bottom: 20px;
+      }
+      .back-icon {
+        color: #e9cfae;
+        font-size: 30px;
+        text-decoration: none;
+        margin-bottom: 20px;
+        display: inline-block;
+      }
+    </style>
+</head>
+<body>
+    <!-- Back Button with Boxicon -->
+    <a href="Non-Coffee.html" class="back-icon"><i class='bx bx-arrow-back'></i> Back to Non-Coffee</a>
+
+    <h1>Payment Details</h1>
+
+    <p>Item: <span id="item-name">N/A</span></p>
+    <p>Quantity: <span id="item-quantity">0</span></p>
+    <p>Total Price: ₱<span id="total-price">0</span></p>
+
+    <h2>Select Payment Method</h2>
+    <button class="payment-button" id="gcash-btn">GCash</button>
+    <button class="payment-button" id="paymaya-btn">PayMaya</button>
+    <button class="payment-button" id="paypal-btn">PayPal</button>
+
+    <script>
+      // Function to get query parameters from the URL
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      // Get parameters from URL (if they exist)
+      const itemName = getQueryParam('name') || 'Item not found';
+      const itemQuantity = getQueryParam('quantity') || '0';
+      const totalPrice = getQueryParam('total') || '0';
+
+      // Display the item details
+      document.getElementById('item-name').textContent = itemName;
+      document.getElementById('item-quantity').textContent = itemQuantity;
+      document.getElementById('total-price').textContent = totalPrice;
+
+      // Payment method buttons logic
+      document.getElementById('gcash-btn').addEventListener('click', function() {
+        alert(`Proceeding with GCash payment for ₱${totalPrice}`);
+        // You can redirect to the GCash payment page here if needed
+      });
+
+      document.getElementById('paymaya-btn').addEventListener('click', function() {
+        alert(`Proceeding with PayMaya payment for ₱${totalPrice}`);
+        // You can redirect to the PayMaya payment page here if needed
+      });
+
+      document.getElementById('paypal-btn').addEventListener('click', function() {
+        alert(`Proceeding with PayPal payment for ₱${totalPrice}`);
+        // You can redirect to the PayPal payment page here if needed
+      });
+    </script>
+</body>
+</html>
