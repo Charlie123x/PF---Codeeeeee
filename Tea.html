@@ -5,106 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tea</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    h1 {
-      margin-bottom: 30px;
-    }
-
-    i {
-      color: #e9cfae;
-      border: 2px solid #e9cfae;
-      border-radius: 25px;
-      padding: 10px;
-      background-color: transparent;
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      font-size: 24px;
-      text-decoration: none;
-    }
-
-    .image-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 50px;
-      color: white;
-    }
-
-    .drink {
-      text-align: center;
-      color: #e9cfae;
-      background-color: #1a1a1a;
-      padding: 15px;
-      border-radius: 12px;
-      width: 320px;
-    }
-
-    .drink img {
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 2px solid #e9cfae;
-      margin-bottom: 10px;
-    }
-
-    .drink h2 {
-      margin: 5px 0;
-      font-size: 18px;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 10px 0;
-    }
-
-    .controls button {
-      background-color: #e9cfae;
-      border: none;
-      padding: 5px 10px;
-      font-size: 18px;
-      border-radius: 5px;
-      cursor: pointer;
-      color: black;
-    }
-
-    .buy-btn {
-      margin-top: 10px;
-      background-color: #e9cfae;
-      border: none;
-      padding: 8px 16px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .quantity {
-      font-size: 18px;
-      min-width: 30px;
-    }
-  </style>
+  <link rel="stylesheet" href="Tea.css">
 </head>
 <body>
   <a href="Menu.html"><i class="bx bx-arrow-back"></i></a>
   <h1>Tea</h1>
 
   <div class="image-row">
-    <div class="drink" data-name="Apricot Ceylon Black Tea" data-price="120">
+    <!-- Drinks Start -->
+    <div class="drink" data-name="Apricot Ceylon Black Tea" data-price="150">
       <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_22COR_KL_ApricotCeylon_v1-01.png?v=1734591947&width=360" alt="Apricot Ceylon Black Tea" />
       <h2>Apricot Ceylon Black Tea</h2>
+      <p>₱180</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Earl Grey Black Tea" data-price="150">
+      <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_22COR_KL_20ct_EarlGrey-01.png?v=1734592183&width=480" alt="Earl Grey Black Tea" />
+      <h2>Earl Grey Black Tea</h2>
+      <p>₱180</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Orchard Peach Green Iced Tea" data-price="150">
+      <img src="https://www.coffeebean.com/cdn/shop/products/orchard_peach_flavored_green_tea_18_pouches_cbtl_front_large_60c4a6f6-38db-456c-8e68-311c0e2497fd.jpg?v=1734594684&width=696" />
+      <h2>Orchard Peach Green Iced Tea</h2>
+      <p>₱200</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Tropical Passion Black Iced Tea" data-price="150">
+      <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_22COR_KL_18ct_TropicalPassion_Iced_v2-01.png?v=1734593908&width=480" alt="Tropical Passion Black Iced Tea" />
+      <h2>Tropical Passion Black Iced Tea</h2>
+      <p>₱200</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Lemon Chamomile Herbal Infusion" data-price="150">
+      <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_22COR_KL_20ct_LemonChamomile-01.png?v=1734593275&width=480" alt="Lemon Chamomile Herbal Infusion" />
+      <h2>Lemon Chamomile Herbal Infusion</h2>
       <p>₱150</p>
       <div class="controls">
         <button class="minus">−</button>
@@ -114,10 +73,10 @@
       <button class="buy-btn">Buy</button>
     </div>
 
-    <div class="drink" data-name="Moroccan Mint Green Tea" data-price="120">
-      <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_22COR_KL_20ct_GenmaichaGreen-01.png?v=1734592412&width=360" alt="Moroccan Mint Green Tea" />
-      <h2>Moroccan Mint Green Tea</h2>
-      <p>₱180</p>
+    <div class="drink" data-name="Ginseng Peppermint Herbal Infusion" data-price="150">
+      <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_23COR_KL_GinsengPeppermint-01.png?v=1734592556&width=480" alt="Ginseng Peppermint Herbal Infusion" />
+      <h2>Ginseng Peppermint Herbal Infusion</h2>
+      <p>₱150</p>
       <div class="controls">
         <button class="minus">−</button>
         <span class="quantity">0</span>
@@ -125,40 +84,126 @@
       </div>
       <button class="buy-btn">Buy</button>
     </div>
+
+    <div class="drink" data-name="Genmaicha Green Tea" data-price="180">
+      <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_22COR_KL_20ct_GenmaichaGreen-01.png?v=1734592412&width=360" alt="Genmaicha Green Tea" />
+      <h2>Genmaicha Green Tea</h2>
+      <p>₱190</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Moroccan Mint Green Tea" data-price="180">
+      <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_22COR_KL_MoroccanMint-01_84f1b5b1-8480-4be7-847f-9798e76ff676.png?v=1741647677&width=600" alt="Moroccan Mint Green Tea" />
+      <h2>Moroccan Mint Green Tea</h2>
+      <p>₱190</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+    <!-- Drinks End -->
   </div>
 
-  <script>
+  </div>
+
+ <!-- Replaced Checkout anchor and fixed cart div structure -->
+<div class="cart-container">
+  <h2>Your Cart</h2>
+  <div class="selected-drinks" id="selected-drinks-container"></div>
+
+  <div style="text-align: center; margin-top: 30px;">
+    <a href="Payment.html" class="button-link" id="checkout-btn">Check out</a>
+  </div>
+</div>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const selectedDrinksContainer = document.getElementById('selected-drinks-container');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    
+    // Track selected items and total price
+    let totalPrice = 0;
+    let selectedItems = [];
+
     document.querySelectorAll('.drink').forEach(drink => {
       const plusBtn = drink.querySelector('.plus');
       const minusBtn = drink.querySelector('.minus');
       const quantityDisplay = drink.querySelector('.quantity');
       const buyBtn = drink.querySelector('.buy-btn');
-
+  
       let quantity = 0;
-
+  
       plusBtn.addEventListener('click', () => {
         quantity++;
         quantityDisplay.textContent = quantity;
       });
-
+  
       minusBtn.addEventListener('click', () => {
         if (quantity > 0) {
           quantity--;
           quantityDisplay.textContent = quantity;
         }
       });
-
+  
       buyBtn.addEventListener('click', () => {
         const name = drink.getAttribute('data-name');
-        const price = parseInt(drink.getAttribute('data-price'));
+        const price = parseInt(drink.getAttribute('data-price'), 10);
+        const imageUrl = drink.querySelector('img').src;
+  
         if (quantity > 0) {
-          const total = quantity * price;
-          window.location.href = `Payment.html?name=${encodeURIComponent(name)}&quantity=${quantity}&total=${total}`;
+          const selectedDrink = document.createElement('div');
+          selectedDrink.classList.add('selected-drink');
+          selectedDrink.innerHTML = `
+            <img src="${imageUrl}" alt="${name}" />
+            <h2>${name}</h2>
+            <p>₱${price}</p>
+            <p>Quantity: ${quantity}</p>
+            <button class="remove-btn">Remove</button>
+          `;
+  
+          selectedDrinksContainer.appendChild(selectedDrink);
+  
+          selectedDrink.querySelector('.remove-btn').addEventListener('click', () => {
+            selectedDrink.remove();
+            updateTotal();
+          });
+  
+          // Add to selected items and update total price
+          selectedItems.push({ name, price, quantity });
+          updateTotal();
+  
+          // Reset
+          quantity = 0;
+          quantityDisplay.textContent = quantity;
         } else {
           alert(`Please select a quantity for ${name}.`);
         }
       });
     });
-  </script>
+
+    // Update the total price whenever an item is added or removed
+    function updateTotal() {
+      totalPrice = selectedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      checkoutBtn.href = `Payment.html?name=${encodeURIComponent(selectedItems.map(item => item.name).join(', '))}&quantity=${encodeURIComponent(selectedItems.map(item => item.quantity).join(', '))}&total=${totalPrice}`;
+    }
+
+    // Checkout logic
+    checkoutBtn.addEventListener('click', (event) => {
+      if (selectedDrinksContainer.children.length === 0) {
+        event.preventDefault();
+        alert('Your cart is empty. Please add an item.');
+      }
+    });
+  });
+
+
+    </script>
 </body>
 </html>
