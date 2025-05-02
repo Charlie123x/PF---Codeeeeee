@@ -1,94 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Method</title>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" /> <!-- Include Boxicons -->
-    <link rel="stylesheet" href="Payment.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Method</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="Payment.css">
 </head>
 <body>
-    <!-- Back Button with Boxicon -->
-    <a href="Menu.html" class="back-icon"><i class='bx bx-arrow-back'></i></a>
 
-    <h1>Payment Method</h1>
+  <!-- Back Button -->
+  <a href="Menu.html" class="back-icon"><i class='bx bx-arrow-back'></i></a>
 
-    <p>Item: <span id="item-name">N/A</span></p>
-    <p>Quantity: <span id="item-quantity">0</span></p>
-    <p>Total Price: ₱<span id="total-price">0</span></p>
+  <h1>Payment Method</h1>
 
-    <h2>Select Payment Method</h2>
-    <button class="payment-button" id="gcash-btn">GCash</button>
-    <button class="payment-button" id="paymaya-btn">PayMaya</button>
-    <button class="payment-button" id="paypal-btn">PayPal</button>
+  <!-- Cart Container (for multiple items) -->
+  <div id="cart-items-container"></div>
 
-<script>
+  <h2>Select Payment Method</h2>
+  <button class="payment-button" id="gcash-btn">GCash</button>
+  <button class="payment-button" id="paymaya-btn">PayMaya</button>
+  <button class="payment-button" id="paypal-btn">PayPal</button>
 
+  <!-- Receipt Display -->
+  <div class="receipt" id="receipt" style="display:none;">
+    <h2>Payment Receipt</h2>
+    <div id="receipt-items"></div>
+    <p><strong>Total:</strong> ₱<span id="receipt-total-price"></span></p>
+    <p><strong>Payment Method:</strong> <span id="receipt-payment-method"></span></p>
+    <p><strong>Status:</strong> Paid successfully!</p>
+  </div>
 
-  // Function to get query parameters from the URL
-  function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-  }
+  <script>
+    // Function to extract query parameters from URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
 
-  // Get parameters from URL (if they exist)
-  const itemName = getQueryParam('name') || 'Item not found';
-  const itemQuantity = getQueryParam('quantity') || '0';
-  const totalPrice = getQueryParam('total') || '0';
+    // Extracting cart data from URL
+    const cartParam = getQueryParam("cart");
+    let totalPrice = parseInt(getQueryParam("total") || "0", 10);
+    const cartItems = JSON.parse(cartParam) || [];
+    const cartContainer = document.getElementById("cart-items-container");
 
-  // Display the item details
-  document.getElementById('item-name').textContent = itemName;
-  document.getElementById('item-quantity').textContent = itemQuantity;
-  document.getElementById('total-price').textContent = totalPrice;
+    // Display cart items on the payment page
+    cartItems.forEach(item => {
+      const itemHTML = `
+        <div class="selected-drink">
+          <img src="${item.image}" width="100" />
+          <h2>${item.name}</h2>
+          <p>₱${item.price}</p>
+          <p>Quantity: ${item.quantity}</p>
+        </div>
+      `;
+      cartContainer.insertAdjacentHTML("beforeend", itemHTML);
+    });
 
-  // Payment method buttons logic
-  document.getElementById('gcash-btn').addEventListener('click', function() {
-    alert(`Proceeding with GCash payment for ₱${totalPrice}`);
-    // You can redirect to the GCash payment page here if needed
-  });
+    // Calculate the total price (no multiplication by quantity, just sum of individual item prices)
+    totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
-  document.getElementById('paymaya-btn').addEventListener('click', function() {
-    alert(`Proceeding with PayMaya payment for ₱${totalPrice}`);
-    // You can redirect to the PayMaya payment page here if needed
-  });
+    // Payment method buttons
+    const paymentButtons = document.querySelectorAll('.payment-button');
+    paymentButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        const paymentMethod = event.target.id.replace('-btn', '').toUpperCase();
+        document.getElementById("receipt-payment-method").textContent = paymentMethod;
+        document.getElementById("receipt-total-price").textContent = totalPrice;
 
-  document.getElementById('paypal-btn').addEventListener('click', function() {
-    alert(`Proceeding with PayPal payment for ₱${totalPrice}`);
-    // You can redirect to the PayPal payment page here if needed
-  });
+        // Display receipt items
+        const receiptItemsHTML = cartItems.map(item => {
+          return `
+            <div>
+              <p>${item.name} - ₱${item.price}</p>
+            </div>
+          `;
+        }).join('');
+        document.getElementById("receipt-items").innerHTML = receiptItemsHTML;
 
-  // Function to get query parameters from the URL
-  function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-  }
+        // Display the receipt
+        document.getElementById("receipt").style.display = "block";
+      });
+    });
 
-  // Get parameters from URL (if they exist)
-  const itemName = getQueryParam('name') || 'Item not found';
-  const itemQuantity = getQueryParam('quantity') || '0';
-  const totalPrice = getQueryParam('total') || '0';
-
-  // Display the item details
-  document.getElementById('item-name').textContent = itemName;
-  document.getElementById('item-quantity').textContent = itemQuantity;
-  document.getElementById('total-price').textContent = totalPrice;
-
-  // Payment method buttons logic
-  document.getElementById('gcash-btn').addEventListener('click', function() {
-    alert(`Proceeding with GCash payment for ₱${totalPrice}`);
-    // You can redirect to the GCash payment page here if needed
-  });
-
-  document.getElementById('paymaya-btn').addEventListener('click', function() {
-    alert(`Proceeding with PayMaya payment for ₱${totalPrice}`);
-    // You can redirect to the PayMaya payment page here if needed
-  });
-
-  document.getElementById('paypal-btn').addEventListener('click', function() {
-    alert(`Proceeding with PayPal payment for ₱${totalPrice}`);
-    // You can redirect to the PayPal payment page here if needed
-  });
-</script>
+  </script>
 
 </body>
 </html>

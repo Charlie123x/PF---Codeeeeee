@@ -5,111 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Non-Coffee</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: black;
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    h1 {
-      color: white;
-      margin-bottom: 30px;
-    }
-
-    i {
-      color: #e9cfae;
-      border: 2px solid #e9cfae;
-      border-radius: 25px;
-      padding: 10px;
-      background-color: transparent;
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      font-size: 24px;
-    }
-
-    .image-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    .drink {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #e9cfae;
-      background-color: #1a1a1a;
-      padding: 15px;
-      border-radius: 12px;
-      width: 320px;
-    }
-
-    .drink img {
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 2px solid #e9cfae;
-      margin-bottom: 10px;
-    }
-
-    .drink h2 {
-      margin: 5px 0;
-      font-size: 18px;
-    }
-
-    .drink p {
-      margin: 5px 0;
-      font-size: 16px;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 10px 0;
-    }
-
-    .controls button {
-      background-color: #e9cfae;
-      border: none;
-      padding: 5px 10px;
-      font-size: 18px;
-      border-radius: 5px;
-      cursor: pointer;
-      color: black;
-    }
-
-    .buy-btn {
-      margin-top: 10px;
-      background-color: #e9cfae;
-      border: none;
-      padding: 8px 16px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .quantity {
-      font-size: 18px;
-      min-width: 30px;
-    }
-  </style>
+  <link rel="stylesheet" href="Non-Coffe.css">
 </head>
 <body>
   <a href="Menu.html"><i class="bx bx-arrow-back"></i></a>
-  <a href="Payment.html" class="buy-button"></a>
   <h1>Non-Coffee</h1>
 
   <div class="image-row">
+    <!-- Drink Cards -->
     <div class="drink" data-name="Blueberry Over Ice" data-price="140">
       <img src="https://tomocoffee.ph/wp-content/uploads/Blueberry-Over-Ice-2-300x300.jpg" alt="Blueberry Over Ice" />
       <h2>Blueberry Over Ice</h2>
@@ -185,37 +88,97 @@
     </div>
   </div>
 
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    <div class="selected-drinks" id="selected-drinks-container"></div>
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="Payment.html" class="button-link" id="checkout-btn">Check out</a>
+    </div>
+  </div>
+
   <script>
-    document.querySelectorAll('.drink').forEach(drink => {
-      const plusBtn = drink.querySelector('.plus');
-      const minusBtn = drink.querySelector('.minus');
-      const quantityDisplay = drink.querySelector('.quantity');
-      const buyBtn = drink.querySelector('.buy-btn');
+    document.addEventListener("DOMContentLoaded", () => {
+      const selectedDrinksContainer = document.getElementById("selected-drinks-container");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      const selectedItems = [];
 
-      let quantity = 0;
+      document.querySelectorAll(".drink").forEach(drink => {
+        const plusBtn = drink.querySelector(".plus");
+        const minusBtn = drink.querySelector(".minus");
+        const quantityDisplay = drink.querySelector(".quantity");
+        const buyBtn = drink.querySelector(".buy-btn");
 
-      plusBtn.addEventListener('click', () => {
-        quantity++;
-        quantityDisplay.textContent = quantity;
-      });
+        let quantity = 0;
 
-      minusBtn.addEventListener('click', () => {
-        if (quantity > 0) {
-          quantity--;
+        plusBtn.addEventListener("click", () => {
+          quantity++;
           quantityDisplay.textContent = quantity;
-        }
+        });
+
+        minusBtn.addEventListener("click", () => {
+          if (quantity > 0) {
+            quantity--;
+            quantityDisplay.textContent = quantity;
+          }
+        });
+
+        buyBtn.addEventListener("click", () => {
+          const name = drink.getAttribute("data-name");
+          const price = parseInt(drink.getAttribute("data-price"), 10);
+          const image = drink.querySelector("img").src;
+
+          if (quantity > 0) {
+            const existingIndex = selectedItems.findIndex(item => item.name === name);
+            if (existingIndex !== -1) {
+              selectedItems[existingIndex].quantity += quantity;
+            } else {
+              selectedItems.push({ name, price, quantity, image });
+            }
+
+            // Add to cart HTML
+            const itemHTML = `
+              <div class="selected-drink" data-name="${name}">
+                <img src="${image}" width="100" />
+                <h2>${name}</h2>
+                <p>₱${price}</p>
+                <p>Quantity: ${quantity}</p>
+                <button class="remove-btn">Remove</button>
+              </div>
+            `;
+            selectedDrinksContainer.insertAdjacentHTML("beforeend", itemHTML);
+
+            // Add remove functionality
+            const lastAdded = selectedDrinksContainer.lastElementChild;
+            lastAdded.querySelector(".remove-btn").addEventListener("click", () => {
+              const index = selectedItems.findIndex(item => item.name === name);
+              if (index !== -1) {
+                selectedItems.splice(index, 1);
+              }
+              lastAdded.remove();
+              updateCheckoutLink();
+            });
+
+            // Reset quantity
+            quantity = 0;
+            quantityDisplay.textContent = quantity;
+
+            updateCheckoutLink();
+          } else {
+            alert(`Please select a quantity for ${name}.`);
+          }
+        });
       });
 
-      // Add the functionality for the "Buy" button to redirect to Payment.html
-      buyBtn.addEventListener('click', () => {
-        const name = drink.getAttribute('data-name');
-        const price = parseInt(drink.getAttribute('data-price'));
-        if (quantity > 0) {
-          const total = quantity * price;
-          // Redirect to Payment.html with query parameters
-          window.location.href = `Payment.html?name=${encodeURIComponent(name)}&quantity=${quantity}&total=${total}`;
-        } else {
-          alert(`Please select a quantity for ${name}.`);
+      function updateCheckoutLink() {
+        const total = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const queryString = encodeURIComponent(JSON.stringify(selectedItems));
+        checkoutBtn.href = `Payment.html?cart=${queryString}&total=${total}`;
+      }
+
+      checkoutBtn.addEventListener("click", (e) => {
+        if (selectedItems.length === 0) {
+          e.preventDefault();
+          alert("Your cart is empty. Please add an item.");
         }
       });
     });

@@ -35,3 +35,75 @@ body {
     left: 15px;
     font-size: 24px; 
 }
+
+.item-image {
+  max-width: 200px;
+  height: auto;
+  margin: 15px 0;
+}
+
+.receipt {
+  display: none;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 10px;
+  max-width: 400px;
+}
+
+.receipt h2 {
+  margin-bottom: 15px;
+  color: black;
+}
+
+.receipt p {
+  margin: 5px 0;
+  color: black;
+}
+
+/* Layout for the cart items */
+#cart-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between items */
+}
+
+.selected-drink {
+
+  padding: 10px;
+  width: calc(33.33% - 20px); /* 3 items per row */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.selected-drink img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Style for payment buttons */
+.payment-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.payment-button:hover {
+  background-color: #0056b3;
+}
+
+/* Receipt styles */
+.receipt {
+  background-color: #f8f9fa;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.receipt p {
+  font-size: 18px;
+}
