@@ -1,35 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dessert</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        body {
-            background-color: black;
-        }
-        h1 {
-            text-align: center;
-            color: white;
-        }
-        
-        i {
-            color: #e9cfae;
-            border: #e9cfae solid 2px;
-            border-radius: 25px;
-            padding: 10px;
-            background-color: transparent;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tea</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="Tea.css">
 </head>
 <body>
-    <h1>Desserts</h1>
+  <a href="Menu.html"><i class="bx bx-arrow-back"></i></a>
+  <h1>Tea</h1>
 
+  <div class="image-row">
+    <!-- Drink Cards -->
+    <div class="drink" data-name="New York Cheesecake" data-price="140">
+      <img src="https://order.blakes.ph/cdn/shop/products/NewYorkCheesecake_370x.jpg?v=1660475827" alt="New York Cheesecake" />
+      <h2>New York Cheesecake</h2>
+      <p>₱220</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
 
-    <a href="Menu.html"><i class='bx bx-arrow-back'></i></a>
+    <div class="drink" data-name="Triple Chocolate Cheesecake" data-price="130">
+      <img src="https://order.blakes.ph/cdn/shop/products/WEBTripleChocolateCheesecake_370x.jpg?v=1660476493" alt="Triple Chocolate Cheesecake" />
+      <h2>Triple Chocolate Cheesecake</h2>
+      <p>₱130</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Tablea Cake" data-price="120">
+      <img src="https://order.blakes.ph/cdn/shop/products/TableaCake_370x.jpg?v=1660476710" alt="Tablea Cake" />
+      <h2>Tablea Cake</h2>
+      <p>₱120</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+  </div>
+
+  <div class="image-row">
+    <div class="drink" data-name="Carrot Cake" data-price="120">
+      <img src="https://order.blakes.ph/cdn/shop/products/CarrotCake_370x.jpg?v=1660476588" alt="Carrot Cake" />
+      <h2>Carrot Cake</h2>
+      <p>₱120</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Jello Poke Cake" data-price="150">
+      <img src="https://www.allrecipes.com/thmb/KtbVePk6W4yLiWSXitikbvhx6hw=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ALR-273112-jell-o-poke-cake-VAT-hero-4x3-94aeb567b7fa492a80edbfd7cf77c2c4.jpg" alt="Jello Poke Cake" />
+      <h2>Jello Poke Cake</h2>
+      <p>₱150</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Honey Bun Cake" data-price="140">
+      <img src="https://www.allrecipes.com/thmb/OLLb1pTHk3Ebh7S37q3fbDhGbrE=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/ALR-257023-grandmas-honey-bun-cake-VAT-4x3-302d2d5ac754415795f14a74d3241139.jpg" alt="Honey Bun Cake" />
+      <h2>Honey Bun Cake</h2>
+      <p>₱140</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+  </div>
+
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    <div class="selected-drinks" id="selected-drinks-container"></div>
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="Payment.html" class="button-link" id="checkout-btn">Check out</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const selectedDrinksContainer = document.getElementById("selected-drinks-container");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      const selectedItems = [];
+
+      document.querySelectorAll(".drink").forEach(drink => {
+        const plusBtn = drink.querySelector(".plus");
+        const minusBtn = drink.querySelector(".minus");
+        const quantityDisplay = drink.querySelector(".quantity");
+        const buyBtn = drink.querySelector(".buy-btn");
+
+        let quantity = 0;
+
+        plusBtn.addEventListener("click", () => {
+          quantity++;
+          quantityDisplay.textContent = quantity;
+        });
+
+        minusBtn.addEventListener("click", () => {
+          if (quantity > 0) {
+            quantity--;
+            quantityDisplay.textContent = quantity;
+          }
+        });
+
+        buyBtn.addEventListener("click", () => {
+          const name = drink.getAttribute("data-name");
+          const price = parseInt(drink.getAttribute("data-price"), 10);
+          const image = drink.querySelector("img").src;
+
+          if (quantity > 0) {
+            const existingIndex = selectedItems.findIndex(item => item.name === name);
+            if (existingIndex !== -1) {
+              selectedItems[existingIndex].quantity += quantity;
+            } else {
+              selectedItems.push({ name, price, quantity, image });
+            }
+
+            const itemHTML = `
+              <div class="selected-drink" data-name="${name}">
+                <img src="${image}" width="100" />
+                <h2>${name}</h2>
+                <p>₱${price}</p>
+                <p>Quantity: ${quantity}</p>
+                <button class="remove-btn">Remove</button>
+              </div>
+            `;
+            selectedDrinksContainer.insertAdjacentHTML("beforeend", itemHTML);
+
+            const lastAdded = selectedDrinksContainer.lastElementChild;
+            lastAdded.querySelector(".remove-btn").addEventListener("click", () => {
+              const index = selectedItems.findIndex(item => item.name === name);
+              if (index !== -1) {
+                selectedItems.splice(index, 1);
+              }
+              lastAdded.remove();
+              updateCheckoutLink();
+            });
+
+            quantity = 0;
+            quantityDisplay.textContent = quantity;
+
+            updateCheckoutLink();
+          } else {
+            alert(`Please select a quantity for ${name}.`);
+          }
+        });
+      });
+
+      function updateCheckoutLink() {
+        const total = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const queryString = encodeURIComponent(JSON.stringify(selectedItems));
+        checkoutBtn.href = `Payment.html?cart=${queryString}&total=${total}`;
+      }
+
+      checkoutBtn.addEventListener("click", (e) => {
+        if (selectedItems.length === 0) {
+          e.preventDefault();
+          alert("Your cart is empty. Please add an item.");
+        }
+      });
+    });
+  </script>
+</div>
 </body>
 </html>

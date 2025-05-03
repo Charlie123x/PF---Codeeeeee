@@ -1,34 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        body {
-            background-color: black;
-        }
-        h1 {
-            text-align: center;
-            color: white;
-        }
-        
-        i {
-            color: #e9cfae;
-            border: #e9cfae solid 2px;
-            border-radius: 25px;
-            padding: 10px;
-            background-color: transparent;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coffee</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+    }
+
+    i {
+      color: #e9cfae;
+      border: #e9cfae solid 2px;
+      border-radius: 25px;
+      padding: 10px;
+      background-color: transparent;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+    }
+
+    .image-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .drink {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      width: 250px;
+    }
+
+    .drink img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .controls {
+      margin: 10px 0;
+    }
+
+    .controls button {
+      padding: 5px 10px;
+      margin: 0 5px;
+      background-color: #e9cfae;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .buy-btn {
+      padding: 8px 20px;
+      background-color: #e9cfae;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>Coffee</h1>
 
-    <a href="Menu.html"><i class='bx bx-arrow-back'></i></a>
+  <a href="Menu.html"><i class='bx bx-arrow-back'></i></a>
+  <h1>Coffee</h1>
+
+  <div class="image-row">
+    <div class="drink" data-name="Flat White" data-price="180" data-image="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Flat-White-by-Nespresso.jpg?imwidth=840">
+      <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Flat-White-by-Nespresso.jpg?imwidth=840" alt="Flat White" />
+      <h2>Flat White</h2>
+      <p>₱180</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Cappuccino Art" data-price="180" data-image="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-cappuccino-art.jpg?imwidth=840">
+      <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-cappuccino-art.jpg?imwidth=840" alt="Cappuccino Art" />
+      <h2>Cappuccino Art</h2>
+      <p>₱180</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Mocca Latte" data-price="180" data-image="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Mocca-Latte-by-Nespresso.jpg?imwidth=840">
+      <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Mocca-Latte-by-Nespresso.jpg?imwidth=840" alt="Mocca Latte" />
+      <h2>Mocca Latte</h2>
+      <p>₱180</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const selectedDrinksContainer = document.getElementById("selected-drinks-container");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      const selectedItems = [];
+
+      document.querySelectorAll(".drink").forEach(drink => {
+        const plusBtn = drink.querySelector(".plus");
+        const minusBtn = drink.querySelector(".minus");
+        const quantityDisplay = drink.querySelector(".quantity");
+        const buyBtn = drink.querySelector(".buy-btn");
+
+        let quantity = 0;
+
+        plusBtn.addEventListener("click", () => {
+          quantity++;
+          quantityDisplay.textContent = quantity;
+        });
+
+        minusBtn.addEventListener("click", () => {
+          if (quantity > 0) {
+            quantity--;
+            quantityDisplay.textContent = quantity;
+          }
+        });
+
+        buyBtn.addEventListener("click", () => {
+          const name = drink.getAttribute("data-name");
+          const price = parseInt(drink.getAttribute("data-price"), 10);
+          const image = drink.querySelector("img").src;
+
+          if (quantity > 0) {
+            const existingIndex = selectedItems.findIndex(item => item.name === name);
+            if (existingIndex !== -1) {
+              selectedItems[existingIndex].quantity += quantity;
+            } else {
+              selectedItems.push({ name, price, quantity, image });
+            }
+
+            const itemHTML = `
+              <div class="selected-drink" data-name="${name}">
+                <img src="${image}" width="100" />
+                <h2>${name}</h2>
+                <p>₱${price}</p>
+                <p>Quantity: ${quantity}</p>
+                <button class="remove-btn">Remove</button>
+              </div>
+            `;
+            selectedDrinksContainer.insertAdjacentHTML("beforeend", itemHTML);
+
+            const lastAdded = selectedDrinksContainer.lastElementChild;
+            lastAdded.querySelector(".remove-btn").addEventListener("click", () => {
+              const index = selectedItems.findIndex(item => item.name === name);
+              if (index !== -1) {
+                selectedItems.splice(index, 1);
+              }
+              lastAdded.remove();
+              updateCheckoutLink();
+            });
+
+            quantity = 0;
+            quantityDisplay.textContent = quantity;
+
+            updateCheckoutLink();
+          } else {
+            alert(`Please select a quantity for ${name}.`);
+          }
+        });
+      });
+
+      function updateCheckoutLink() {
+        const total = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const queryString = encodeURIComponent(JSON.stringify(selectedItems));
+        checkoutBtn.href = `Payment.html?cart=${queryString}&total=${total}`;
+      }
+
+      checkoutBtn.addEventListener("click", (e) => {
+        if (selectedItems.length === 0) {
+          e.preventDefault();
+          alert("Your cart is empty. Please add an item.");
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

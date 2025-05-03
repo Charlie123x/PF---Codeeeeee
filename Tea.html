@@ -12,7 +12,6 @@
   <h1>Tea</h1>
 
   <div class="image-row">
-    <!-- Drinks Start -->
     <div class="drink" data-name="Apricot Ceylon Black Tea" data-price="150">
       <img src="https://www.coffeebean.com/cdn/shop/files/E-Comm_Tea_22COR_KL_ApricotCeylon_v1-01.png?v=1734591947&width=360" alt="Apricot Ceylon Black Tea" />
       <h2>Apricot Ceylon Black Tea</h2>
@@ -108,12 +107,9 @@
       </div>
       <button class="buy-btn">Buy</button>
     </div>
-    <!-- Drinks End -->
   </div>
 
   </div>
-
- <!-- Replaced Checkout anchor and fixed cart div structure -->
 <div class="cart-container">
   <h2>Your Cart</h2>
   <div class="selected-drinks" id="selected-drinks-container"></div>
@@ -121,89 +117,91 @@
   <div style="text-align: center; margin-top: 30px;">
     <a href="Payment.html" class="button-link" id="checkout-btn">Check out</a>
   </div>
-</div>
 
-    <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const selectedDrinksContainer = document.getElementById('selected-drinks-container');
-    const checkoutBtn = document.getElementById('checkout-btn');
-    
-    // Track selected items and total price
-    let totalPrice = 0;
-    let selectedItems = [];
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const selectedDrinksContainer = document.getElementById("selected-drinks-container");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      const selectedItems = [];
 
-    document.querySelectorAll('.drink').forEach(drink => {
-      const plusBtn = drink.querySelector('.plus');
-      const minusBtn = drink.querySelector('.minus');
-      const quantityDisplay = drink.querySelector('.quantity');
-      const buyBtn = drink.querySelector('.buy-btn');
-  
-      let quantity = 0;
-  
-      plusBtn.addEventListener('click', () => {
-        quantity++;
-        quantityDisplay.textContent = quantity;
-      });
-  
-      minusBtn.addEventListener('click', () => {
-        if (quantity > 0) {
-          quantity--;
+      document.querySelectorAll(".drink").forEach(drink => {
+        const plusBtn = drink.querySelector(".plus");
+        const minusBtn = drink.querySelector(".minus");
+        const quantityDisplay = drink.querySelector(".quantity");
+        const buyBtn = drink.querySelector(".buy-btn");
+
+        let quantity = 0;
+
+        plusBtn.addEventListener("click", () => {
+          quantity++;
           quantityDisplay.textContent = quantity;
-        }
-      });
-  
-      buyBtn.addEventListener('click', () => {
-        const name = drink.getAttribute('data-name');
-        const price = parseInt(drink.getAttribute('data-price'), 10);
-        const imageUrl = drink.querySelector('img').src;
-  
-        if (quantity > 0) {
-          const selectedDrink = document.createElement('div');
-          selectedDrink.classList.add('selected-drink');
-          selectedDrink.innerHTML = `
-            <img src="${imageUrl}" alt="${name}" />
-            <h2>${name}</h2>
-            <p>₱${price}</p>
-            <p>Quantity: ${quantity}</p>
-            <button class="remove-btn">Remove</button>
-          `;
-  
-          selectedDrinksContainer.appendChild(selectedDrink);
-  
-          selectedDrink.querySelector('.remove-btn').addEventListener('click', () => {
-            selectedDrink.remove();
-            updateTotal();
-          });
-  
-          // Add to selected items and update total price
-          selectedItems.push({ name, price, quantity });
-          updateTotal();
-  
-          // Reset
-          quantity = 0;
-          quantityDisplay.textContent = quantity;
-        } else {
-          alert(`Please select a quantity for ${name}.`);
-        }
-      });
-    });
+        });
 
-    // Update the total price whenever an item is added or removed
-    function updateTotal() {
-      totalPrice = selectedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      checkoutBtn.href = `Payment.html?name=${encodeURIComponent(selectedItems.map(item => item.name).join(', '))}&quantity=${encodeURIComponent(selectedItems.map(item => item.quantity).join(', '))}&total=${totalPrice}`;
-    }
+        minusBtn.addEventListener("click", () => {
+          if (quantity > 0) {
+            quantity--;
+            quantityDisplay.textContent = quantity;
+          }
+        });
 
-    // Checkout logic
-    checkoutBtn.addEventListener('click', (event) => {
-      if (selectedDrinksContainer.children.length === 0) {
-        event.preventDefault();
-        alert('Your cart is empty. Please add an item.');
+        buyBtn.addEventListener("click", () => {
+          const name = drink.getAttribute("data-name");
+          const price = parseInt(drink.getAttribute("data-price"), 10);
+          const image = drink.querySelector("img").src;
+
+          if (quantity > 0) {
+            const existingIndex = selectedItems.findIndex(item => item.name === name);
+            if (existingIndex !== -1) {
+              selectedItems[existingIndex].quantity += quantity;
+            } else {
+              selectedItems.push({ name, price, quantity, image });
+            }
+
+            const itemHTML = `
+              <div class="selected-drink" data-name="${name}">
+                <img src="${image}" width="100" />
+                <h2>${name}</h2>
+                <p>₱${price}</p>
+                <p>Quantity: ${quantity}</p>
+                <button class="remove-btn">Remove</button>
+              </div>
+            `;
+            selectedDrinksContainer.insertAdjacentHTML("beforeend", itemHTML);
+
+            const lastAdded = selectedDrinksContainer.lastElementChild;
+            lastAdded.querySelector(".remove-btn").addEventListener("click", () => {
+              const index = selectedItems.findIndex(item => item.name === name);
+              if (index !== -1) {
+                selectedItems.splice(index, 1);
+              }
+              lastAdded.remove();
+              updateCheckoutLink();
+            });
+
+            quantity = 0;
+            quantityDisplay.textContent = quantity;
+
+            updateCheckoutLink();
+          } else {
+            alert(`Please select a quantity for ${name}.`);
+          }
+        });
+      });
+
+      function updateCheckoutLink() {
+        const total = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const queryString = encodeURIComponent(JSON.stringify(selectedItems));
+        checkoutBtn.href = `Payment.html?cart=${queryString}&total=${total}`;
       }
+
+      checkoutBtn.addEventListener("click", (e) => {
+        if (selectedItems.length === 0) {
+          e.preventDefault();
+          alert("Your cart is empty. Please add an item.");
+        }
+      });
     });
-  });
-
-
-    </script>
+  </script>
+</div>
 </body>
 </html>

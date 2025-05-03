@@ -14,7 +14,7 @@
 
   <h1>Payment Method</h1>
 
-  <!-- Cart Container (for multiple items) -->
+  <!-- Cart Container -->
   <div id="cart-items-container"></div>
 
   <h2>Select Payment Method</h2>
@@ -32,19 +32,24 @@
   </div>
 
   <script>
-    // Function to extract query parameters from URL
+    // Get cart from URL
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
     }
 
-    // Extracting cart data from URL
     const cartParam = getQueryParam("cart");
-    let totalPrice = parseInt(getQueryParam("total") || "0", 10);
-    const cartItems = JSON.parse(cartParam) || [];
+    let cartItems = [];
+
+    try {
+      cartItems = JSON.parse(decodeURIComponent(cartParam)) || [];
+    } catch (e) {
+      console.error("Failed to parse cart data:", e);
+    }
+
     const cartContainer = document.getElementById("cart-items-container");
 
-    // Display cart items on the payment page
+    // Display items in the cart
     cartItems.forEach(item => {
       const itemHTML = `
         <div class="selected-drink">
@@ -57,32 +62,26 @@
       cartContainer.insertAdjacentHTML("beforeend", itemHTML);
     });
 
-    // Calculate the total price (no multiplication by quantity, just sum of individual item prices)
-    totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+    // Correct total with quantity calculation
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    // Payment method buttons
+    // Handle payment method selection
     const paymentButtons = document.querySelectorAll('.payment-button');
     paymentButtons.forEach(button => {
       button.addEventListener('click', (event) => {
         const paymentMethod = event.target.id.replace('-btn', '').toUpperCase();
+
         document.getElementById("receipt-payment-method").textContent = paymentMethod;
         document.getElementById("receipt-total-price").textContent = totalPrice;
 
-        // Display receipt items
         const receiptItemsHTML = cartItems.map(item => {
-          return `
-            <div>
-              <p>${item.name} - ₱${item.price}</p>
-            </div>
-          `;
+          return `<div><p>${item.name} - ₱${item.price} × ${item.quantity}</p></div>`;
         }).join('');
-        document.getElementById("receipt-items").innerHTML = receiptItemsHTML;
 
-        // Display the receipt
+        document.getElementById("receipt-items").innerHTML = receiptItemsHTML;
         document.getElementById("receipt").style.display = "block";
       });
     });
-
   </script>
 
 </body>
