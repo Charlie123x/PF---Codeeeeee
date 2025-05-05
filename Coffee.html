@@ -2,115 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coffee</title>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-
-    h1 {
-      text-align: center;
-      color: white;
-    }
-
-    i {
-      color: #e9cfae;
-      border: #e9cfae solid 2px;
-      border-radius: 25px;
-      padding: 10px;
-      background-color: transparent;
-      position: absolute;
-      top: 15px;
-      left: 15px;
-    }
-
-    .image-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      padding: 20px;
-    }
-
-    .drink {
-      background-color: #1e1e1e;
-      padding: 15px;
-      border-radius: 15px;
-      text-align: center;
-      width: 250px;
-    }
-
-    .drink img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .controls {
-      margin: 10px 0;
-    }
-
-    .controls button {
-      padding: 5px 10px;
-      margin: 0 5px;
-      background-color: #e9cfae;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .buy-btn {
-      padding: 8px 20px;
-      background-color: #e9cfae;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="Tea.css">
 </head>
 <body>
-
-  <a href="Menu.html"><i class='bx bx-arrow-back'></i></a>
+  <a href="Menu.html"><i class="bx bx-arrow-back"></i></a>
   <h1>Coffee</h1>
 
   <div class="image-row">
-    <div class="drink" data-name="Flat White" data-price="180" data-image="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Flat-White-by-Nespresso.jpg?imwidth=840">
-      <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Flat-White-by-Nespresso.jpg?imwidth=840" alt="Flat White" />
-      <h2>Flat White</h2>
-      <p>₱180</p>
-      <div class="controls">
-        <button class="minus">−</button>
-        <span class="quantity">0</span>
-        <button class="plus">+</button>
-      </div>
-      <button class="buy-btn">Buy</button>
-    </div>
-
-    <div class="drink" data-name="Cappuccino Art" data-price="180" data-image="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-cappuccino-art.jpg?imwidth=840">
-      <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-cappuccino-art.jpg?imwidth=840" alt="Cappuccino Art" />
-      <h2>Cappuccino Art</h2>
-      <p>₱180</p>
-      <div class="controls">
-        <button class="minus">−</button>
-        <span class="quantity">0</span>
-        <button class="plus">+</button>
-      </div>
-      <button class="buy-btn">Buy</button>
-    </div>
-
-    <div class="drink" data-name="Mocca Latte" data-price="180" data-image="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Mocca-Latte-by-Nespresso.jpg?imwidth=840">
+    <!-- Drink Cards -->
+    <div class="drink" data-name="Mocca Latte" data-price="140">
       <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Mocca-Latte-by-Nespresso.jpg?imwidth=840" alt="Mocca Latte" />
       <h2>Mocca Latte</h2>
-      <p>₱180</p>
+      <p>₱220</p>
       <div class="controls">
         <button class="minus">−</button>
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
       <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Cappuccino Art" data-price="130">
+      <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-cappuccino-art.jpg?imwidth=840" alt="Cappuccino Art" />
+      <h2>Cappuccino Art</h2>
+      <p>₱130</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Flat White" data-price="120">
+      <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Flat-White-by-Nespresso.jpg?imwidth=840" alt="Flat White" />
+      <h2>Flat White</h2>
+      <p>₱120</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+  </div>
+
+  <div class="image-row">
+    <div class="drink" data-name="Espresso Coffee" data-price="120">
+      <img src="https://www.sharmispassions.com/wp-content/uploads/2012/07/espresso-coffee-recipe022.jpg" alt="Espresso Coffee" />
+      <h2>Espresso Coffee</h2>
+      <p>₱120</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+
+    <div class="drink" data-name="Black Coffee" data-price="150">
+      <img src="https://www.sharmispassions.com/wp-content/uploads/2021/05/black-coffee-recipe4.jpg" alt="Black Coffee" />
+      <h2>Black Coffee</h2>
+      <p>₱150</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+    </div>
+
+    <div class="drink" data-name="Americano Coffee" data-price="140">
+      <img src="https://www.coffeebeans.ph/storage/2023/07/americano-530x530.jpg" alt="Americano Coffee" />
+      <h2>Americano Coffee</h2>
+      <p>₱140</p>
+      <div class="controls">
+        <button class="minus">−</button>
+        <span class="quantity">0</span>
+        <button class="plus">+</button>
+      </div>
+      <button class="buy-btn">Buy</button>
+    </div>
+  </div>
+
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    <div class="selected-drinks" id="selected-drinks-container"></div>
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="Payment.html" class="button-link" id="checkout-btn">Check out</a>
     </div>
   </div>
 
@@ -198,6 +179,6 @@
       });
     });
   </script>
-
+</div>
 </body>
 </html>
