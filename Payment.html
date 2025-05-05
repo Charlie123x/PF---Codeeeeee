@@ -31,58 +31,60 @@
     <p><strong>Status:</strong> Paid successfully!</p>
   </div>
 
-  <script>
-    // Get cart from URL
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
+<script>
+  // Get cart from URL
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
-    const cartParam = getQueryParam("cart");
-    let cartItems = [];
+  const cartParam = getQueryParam("cart");
+  let cartItems = [];
 
-    try {
-      cartItems = JSON.parse(decodeURIComponent(cartParam)) || [];
-    } catch (e) {
-      console.error("Failed to parse cart data:", e);
-    }
+  try {
+    cartItems = JSON.parse(decodeURIComponent(cartParam)) || [];
+  } catch (e) {
+    console.error("Failed to parse cart data:", e);
+  }
 
-    const cartContainer = document.getElementById("cart-items-container");
+  const cartContainer = document.getElementById("cart-items-container");
 
-    // Display items in the cart
-    cartItems.forEach(item => {
-      const itemHTML = `
-        <div class="selected-drink">
-          <img src="${item.image}" width="100" />
-          <h2>${item.name}</h2>
-          <p>₱${item.price}</p>
-          <p>Quantity: ${item.quantity}</p>
-        </div>
-      `;
-      cartContainer.insertAdjacentHTML("beforeend", itemHTML);
-    });
+  // Display items in the cart
+  cartItems.forEach(item => {
+    const itemHTML = `
+      <div class="selected-drink">
+        <img src="${item.image}" width="100" />
+        <h2>${item.name}</h2>
+        <p>₱${item.price}</p>
+        <p>Quantity: ${item.quantity}</p>
+      </div>
+    `;
+    cartContainer.insertAdjacentHTML("beforeend", itemHTML);
+  });
 
-    // Correct total with quantity calculation
-    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  // Correct total with quantity calculation
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    // Handle payment method selection
-    const paymentButtons = document.querySelectorAll('.payment-button');
-    paymentButtons.forEach(button => {
-      button.addEventListener('click', (event) => {
-        const paymentMethod = event.target.id.replace('-btn', '').toUpperCase();
+  // Handle payment method selection
+  const paymentButtons = document.querySelectorAll('.payment-button');
+  paymentButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+      const paymentMethod = event.target.id.replace('-btn', '').toUpperCase();
 
-        document.getElementById("receipt-payment-method").textContent = paymentMethod;
-        document.getElementById("receipt-total-price").textContent = totalPrice;
+      // Create the receipt content for the alert
+      let receiptContent = `Payment Method: ${paymentMethod}\n`;
+      receiptContent += `Total: ₱${totalPrice}\n\nItems:\n`;
 
-        const receiptItemsHTML = cartItems.map(item => {
-          return `<div><p>${item.name} - ₱${item.price} × ${item.quantity}</p></div>`;
-        }).join('');
-
-        document.getElementById("receipt-items").innerHTML = receiptItemsHTML;
-        document.getElementById("receipt").style.display = "block";
+      cartItems.forEach(item => {
+        receiptContent += `${item.name} - ₱${item.price} × ${item.quantity}\n`;
       });
+
+      // Show the receipt in an alert box
+      alert(receiptContent);
     });
-  </script>
+  });
+</script>
+
 
 </body>
 </html>
