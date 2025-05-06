@@ -8,12 +8,14 @@
   <link rel="stylesheet" href="Tea.css">
 </head>
 <body>
+
+  <!-- Back Button -->
   <a href="Menu.html"><i class="bx bx-arrow-back"></i></a>
   <h1>Coffee</h1>
 
+  <!-- Drinks Row 1 -->
   <div class="image-row">
-    <!-- Drink Cards -->
-    <div class="drink" data-name="Mocca Latte" data-price="140">
+    <div class="drink" data-name="Mocca Latte" data-price="220">
       <img src="https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Mocca-Latte-by-Nespresso.jpg?imwidth=840" alt="Mocca Latte" />
       <h2>Mocca Latte</h2>
       <p>₱220</p>
@@ -50,6 +52,7 @@
     </div>
   </div>
 
+  <!-- Drinks Row 2 -->
   <div class="image-row">
     <div class="drink" data-name="Espresso Coffee" data-price="120">
       <img src="https://www.sharmispassions.com/wp-content/uploads/2012/07/espresso-coffee-recipe022.jpg" alt="Espresso Coffee" />
@@ -72,6 +75,7 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
+      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Americano Coffee" data-price="140">
@@ -87,6 +91,7 @@
     </div>
   </div>
 
+  <!-- Cart Section -->
   <div class="cart-container">
     <h2>Your Cart</h2>
     <div class="selected-drinks" id="selected-drinks-container"></div>
@@ -95,6 +100,7 @@
     </div>
   </div>
 
+  <!-- JavaScript -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const selectedDrinksContainer = document.getElementById("selected-drinks-container");
@@ -179,6 +185,6 @@
       });
     });
   </script>
-</div>
+
 </body>
 </html>
