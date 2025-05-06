@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tea</title>
+  <title>Dessert</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="Tea.css">
 </head>
 <body>
   <a href="Menu.html"><i class="bx bx-arrow-back"></i></a>
-  <h1>Tea</h1>
+  <h1>Dessert</h1>
 
   <div class="image-row">
-    <!-- Drink Cards -->
-    <div class="drink" data-name="New York Cheesecake" data-price="140">
+    <!-- Dessert Cards -->
+    <div class="drink" data-name="New York Cheesecake" data-price="220">
       <img src="https://order.blakes.ph/cdn/shop/products/NewYorkCheesecake_370x.jpg?v=1660475827" alt="New York Cheesecake" />
       <h2>New York Cheesecake</h2>
       <p>₱220</p>
@@ -22,7 +22,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Triple Chocolate Cheesecake" data-price="130">
@@ -34,7 +33,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Tablea Cake" data-price="120">
@@ -46,7 +44,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
   </div>
 
@@ -60,7 +57,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Jello Poke Cake" data-price="150">
@@ -72,7 +68,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Honey Bun Cake" data-price="140">
@@ -84,7 +79,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
   </div>
 
@@ -96,90 +90,7 @@
     </div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const selectedDrinksContainer = document.getElementById("selected-drinks-container");
-      const checkoutBtn = document.getElementById("checkout-btn");
-      const selectedItems = [];
-
-      document.querySelectorAll(".drink").forEach(drink => {
-        const plusBtn = drink.querySelector(".plus");
-        const minusBtn = drink.querySelector(".minus");
-        const quantityDisplay = drink.querySelector(".quantity");
-        const buyBtn = drink.querySelector(".buy-btn");
-
-        let quantity = 0;
-
-        plusBtn.addEventListener("click", () => {
-          quantity++;
-          quantityDisplay.textContent = quantity;
-        });
-
-        minusBtn.addEventListener("click", () => {
-          if (quantity > 0) {
-            quantity--;
-            quantityDisplay.textContent = quantity;
-          }
-        });
-
-        buyBtn.addEventListener("click", () => {
-          const name = drink.getAttribute("data-name");
-          const price = parseInt(drink.getAttribute("data-price"), 10);
-          const image = drink.querySelector("img").src;
-
-          if (quantity > 0) {
-            const existingIndex = selectedItems.findIndex(item => item.name === name);
-            if (existingIndex !== -1) {
-              selectedItems[existingIndex].quantity += quantity;
-            } else {
-              selectedItems.push({ name, price, quantity, image });
-            }
-
-            const itemHTML = `
-              <div class="selected-drink" data-name="${name}">
-                <img src="${image}" width="100" />
-                <h2>${name}</h2>
-                <p>₱${price}</p>
-                <p>Quantity: ${quantity}</p>
-                <button class="remove-btn">Remove</button>
-              </div>
-            `;
-            selectedDrinksContainer.insertAdjacentHTML("beforeend", itemHTML);
-
-            const lastAdded = selectedDrinksContainer.lastElementChild;
-            lastAdded.querySelector(".remove-btn").addEventListener("click", () => {
-              const index = selectedItems.findIndex(item => item.name === name);
-              if (index !== -1) {
-                selectedItems.splice(index, 1);
-              }
-              lastAdded.remove();
-              updateCheckoutLink();
-            });
-
-            quantity = 0;
-            quantityDisplay.textContent = quantity;
-
-            updateCheckoutLink();
-          } else {
-            alert(`Please select a quantity for ${name}.`);
-          }
-        });
-      });
-
-      function updateCheckoutLink() {
-        const total = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const queryString = encodeURIComponent(JSON.stringify(selectedItems));
-        checkoutBtn.href = `Payment.html?cart=${queryString}&total=${total}`;
-      }
-
-      checkoutBtn.addEventListener("click", (e) => {
-        if (selectedItems.length === 0) {
-          e.preventDefault();
-          alert("Your cart is empty. Please add an item.");
-        }
-      });
-    });
-  </script>
-</div>
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>

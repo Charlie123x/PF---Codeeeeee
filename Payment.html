@@ -18,9 +18,11 @@
   <div id="cart-items-container"></div>
 
   <h2>Select Payment Method</h2>
-  <button class="payment-button" onclick="makePayment('GCash')">GCash</button>
-  <button class="payment-button" onclick="makePayment('Cash')">Cash</button>
-  <button class="payment-button" onclick="makePayment('Card/Debit')">Card/Debit</button>
+  <div class="payment-buttons-container">
+    <button class="payment-button" onclick="makePayment('GCash')">GCash</button>
+    <button class="payment-button" onclick="makePayment('Cash')">Cash</button>
+    <button class="payment-button" onclick="makePayment('Card/Debit')">Card/Debit</button>
+  </div>
 
   <!-- Receipt Display -->
   <div class="receipt" id="receipt">
@@ -30,6 +32,15 @@
     <p><strong>Payment Method:</strong> <span id="receipt-payment-method"></span></p>
     <p><strong>Status:</strong> Paid successfully!</p>
     <p><strong>Note:</strong> Please proceed to the cashier.</p>
+    <button id="proceed-button" class="payment-button">Proceed</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="thankyou-modal">
+    <div class="modal-content">
+      <h2>Thank you for ordering!</h2>
+      <button onclick="redirectToHome()">Done</button>
+    </div>
   </div>
 
   <script>
@@ -76,12 +87,16 @@
           <p>${item.name} - ₱${item.price} × ${item.quantity}</p>
         `;
       });
+    }
 
-      alert(
-        `Payment Method: ${method}\nTotal: ₱${totalPrice}\n\nItems:\n` +
-        cartItems.map(item => `${item.name} - ₱${item.price} × ${item.quantity}`).join('\n') +
-        `\n\nPlease proceed to the cashier.`
-      );
+    // Show modal when "Proceed" button is clicked
+    document.getElementById('proceed-button').addEventListener('click', () => {
+      document.getElementById('thankyou-modal').style.display = 'flex';
+    });
+
+    // Redirect to index.html when "Done" button is clicked
+    function redirectToHome() {
+      window.location.href = 'index.html';
     }
   </script>
 

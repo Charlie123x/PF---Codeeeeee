@@ -24,7 +24,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Cappuccino Art" data-price="130">
@@ -36,7 +35,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Flat White" data-price="120">
@@ -48,7 +46,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
   </div>
 
@@ -63,7 +60,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Black Coffee" data-price="150">
@@ -75,7 +71,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
 
     <div class="drink" data-name="Americano Coffee" data-price="140">
@@ -87,7 +82,6 @@
         <span class="quantity">0</span>
         <button class="plus">+</button>
       </div>
-      <button class="buy-btn">Buy</button>
     </div>
   </div>
 
@@ -101,90 +95,7 @@
   </div>
 
   <!-- JavaScript -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const selectedDrinksContainer = document.getElementById("selected-drinks-container");
-      const checkoutBtn = document.getElementById("checkout-btn");
-      const selectedItems = [];
-
-      document.querySelectorAll(".drink").forEach(drink => {
-        const plusBtn = drink.querySelector(".plus");
-        const minusBtn = drink.querySelector(".minus");
-        const quantityDisplay = drink.querySelector(".quantity");
-        const buyBtn = drink.querySelector(".buy-btn");
-
-        let quantity = 0;
-
-        plusBtn.addEventListener("click", () => {
-          quantity++;
-          quantityDisplay.textContent = quantity;
-        });
-
-        minusBtn.addEventListener("click", () => {
-          if (quantity > 0) {
-            quantity--;
-            quantityDisplay.textContent = quantity;
-          }
-        });
-
-        buyBtn.addEventListener("click", () => {
-          const name = drink.getAttribute("data-name");
-          const price = parseInt(drink.getAttribute("data-price"), 10);
-          const image = drink.querySelector("img").src;
-
-          if (quantity > 0) {
-            const existingIndex = selectedItems.findIndex(item => item.name === name);
-            if (existingIndex !== -1) {
-              selectedItems[existingIndex].quantity += quantity;
-            } else {
-              selectedItems.push({ name, price, quantity, image });
-            }
-
-            const itemHTML = `
-              <div class="selected-drink" data-name="${name}">
-                <img src="${image}" width="100" />
-                <h2>${name}</h2>
-                <p>₱${price}</p>
-                <p>Quantity: ${quantity}</p>
-                <button class="remove-btn">Remove</button>
-              </div>
-            `;
-            selectedDrinksContainer.insertAdjacentHTML("beforeend", itemHTML);
-
-            const lastAdded = selectedDrinksContainer.lastElementChild;
-            lastAdded.querySelector(".remove-btn").addEventListener("click", () => {
-              const index = selectedItems.findIndex(item => item.name === name);
-              if (index !== -1) {
-                selectedItems.splice(index, 1);
-              }
-              lastAdded.remove();
-              updateCheckoutLink();
-            });
-
-            quantity = 0;
-            quantityDisplay.textContent = quantity;
-
-            updateCheckoutLink();
-          } else {
-            alert(`Please select a quantity for ${name}.`);
-          }
-        });
-      });
-
-      function updateCheckoutLink() {
-        const total = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const queryString = encodeURIComponent(JSON.stringify(selectedItems));
-        checkoutBtn.href = `Payment.html?cart=${queryString}&total=${total}`;
-      }
-
-      checkoutBtn.addEventListener("click", (e) => {
-        if (selectedItems.length === 0) {
-          e.preventDefault();
-          alert("Your cart is empty. Please add an item.");
-        }
-      });
-    });
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
